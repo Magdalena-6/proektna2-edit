@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Quiz: Custom Scoring</title>
+  <link rel="stylesheet" type="text/css" href="../dist/jquery.quiz-min.css" />
+</head>
+<body>
+<div id="quiz">
+  <div id="quiz-header">
+    <h1 id="quiz-logo">Quiz Macedonia</h1>
+    <p><a id="quiz-home">Home</a></p>
+  </div>
+  <div id="quiz-start-screen">
+    <div><a href="#" id="quiz-start-btn" class="quiz-button">Click to Start</a></div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../dist/jquery.quiz-min.js"></script>
+<script>
+
+  var totalScore = 0;
+
+  var answerCallback = function(currentQuestion, selected, question) {
+
+    if (selected === question.correctIndex) {
+      totalScore += question.points || 1;
+    }
+  };
+
+  var resetScore = function() {
+    totalScore = 0;
+  };
+
+  var finishCallback = function() {
+    $('#quiz-results').html('Total Score: ' + totalScore + ' Points');
+    totalScore = 0;
+  };
+
+  $('#quiz').quiz({
+    homeButton: '#quiz-home',
+
+    answerCallback: answerCallback,
+    finishCallback: finishCallback,
+    homeCallback: resetScore,
+    questions: [
+      {
+        'q': 'Macedonia\'s capital city is Skopje. (5 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 5 
+      },
+      {
+        'q': 'The Euro is Macedonia\'s official valute. (10 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 10
+      },
+      {
+        'q': 'Vardar is Macedonia\'s largest river. (1 point)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect'
+      },
+      {
+        'q': 'Macedonia\'s southern neighbour is Serbia. (3 points)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect',
+        'points': 3
+      },
+      {
+        'q': 'Macedonia\'s highest peak is Korab. (1 point)',
+        'options': [
+          'True',
+          'False'
+        ],
+        'correctIndex': 0,
+        'correctResponse': 'Correct!',
+        'incorrectResponse': 'Incorrect'
+      }
+    ]
+  });
+</script>
+
+</body>
+</html>
